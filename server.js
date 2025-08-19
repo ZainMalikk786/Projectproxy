@@ -1,18 +1,27 @@
+require('dotenv').config();
 const express = require('express');
+const morgan = require('morgan');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 
-// Signal ka official server URL ya jis server ka proxy banana hai
-const SIGNAL_SERVER_URL = 'https://signal.org';
+// Logging middleware
+app.use(morgan('combined'));
 
+// Target URL for Signal proxy
+const TARGET_URL = process.env.TARGET_URL || 'https://signal.org';
+
+// Proxy middleware
 app.use('/', createProxyMiddleware({
-  target: SIGNAL_SERVER_URL,
+  target: TARGET_URL,
   changeOrigin: true,
-  logLevel: 'debug'
+  logLevel: 'debug',
+  onError(err, req, res) {
+    console.error('Proxy error:', err);
+    res.status(500).send('Proxy encountered an error.');
+  }
 }));
 
+// Use Railway port or fallback
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Signal proxy running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Signal proxy running on port ${PORT}`));
