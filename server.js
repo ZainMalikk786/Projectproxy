@@ -5,10 +5,10 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 
-// Logging middleware
+// Logging
 app.use(morgan('combined'));
 
-// Target URL for Signal proxy
+// Proxy target
 const TARGET_URL = process.env.TARGET_URL || 'https://signal.org';
 
 // Proxy middleware
@@ -22,6 +22,6 @@ app.use('/', createProxyMiddleware({
   }
 }));
 
-// Use Railway port or fallback
+// Railway port or fallback
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Signal proxy running on port ${PORT}`));
