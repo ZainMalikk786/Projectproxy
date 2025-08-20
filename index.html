@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zain Malik | Cosmic Portfolio</title>
+    <title>Zain Malik | Golden Cosmic Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --neon-green: #00FF7F;
+            --gold: #FFD700;
+            --dark-gold: #D4AF37;
+            --light-gold: #FFEA80;
             --dark-bg: #0a0a0a;
-            --card-bg: rgba(15, 15, 15, 0.7);
-            --glow-intensity: 2px;
-            --transition-speed: 0.3s;
+            --card-bg: rgba(25, 20, 5, 0.85);
+            --glow-intensity: 3px;
+            --transition-speed: 0.4s;
         }
 
         * {
@@ -26,6 +28,10 @@
             color: white;
             overflow-x: hidden;
             line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 60%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 20%);
         }
 
         /* Navigation */
@@ -38,16 +44,16 @@
             align-items: center;
             padding: 1.5rem 5%;
             z-index: 1000;
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 255, 127, 0.2);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            color: var(--neon-green);
-            text-shadow: 0 0 10px var(--neon-green);
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold);
             letter-spacing: 2px;
         }
 
@@ -66,8 +72,8 @@
         }
 
         .nav-links a:hover {
-            color: var(--neon-green);
-            text-shadow: 0 0 10px var(--neon-green);
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold);
         }
 
         .nav-links a::after {
@@ -77,8 +83,8 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--neon-green);
-            box-shadow: 0 0 8px var(--neon-green);
+            background: var(--gold);
+            box-shadow: 0 0 8px var(--gold);
             transition: width var(--transition-speed);
         }
 
@@ -98,10 +104,10 @@
         .menu-toggle span {
             height: 3px;
             width: 100%;
-            background-color: var(--neon-green);
+            background-color: var(--gold);
             border-radius: 3px;
             transition: all var(--transition-speed);
-            box-shadow: 0 0 5px var(--neon-green);
+            box-shadow: 0 0 5px var(--gold);
         }
 
         /* Sections */
@@ -116,8 +122,8 @@
             font-size: 2.5rem;
             margin-bottom: 3rem;
             text-align: center;
-            color: var(--neon-green);
-            text-shadow: 0 0 15px var(--neon-green);
+            color: var(--gold);
+            text-shadow: 0 0 15px var(--gold);
             letter-spacing: 2px;
         }
 
@@ -128,21 +134,25 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            background: radial-gradient(ellipse at center, rgba(40, 30, 5, 0.4) 0%, var(--dark-bg) 70%);
         }
 
         .hero-title {
             font-size: 4rem;
             margin-bottom: 1.5rem;
             color: white;
-            text-shadow: 0 0 20px var(--neon-green);
+            text-shadow: 0 0 20px var(--gold);
+            background: linear-gradient(to right, var(--light-gold), var(--gold), var(--dark-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
             font-size: 1.8rem;
             margin-bottom: 3rem;
             max-width: 800px;
-            color: var(--neon-green);
-            text-shadow: 0 0 10px var(--neon-green);
+            color: var(--light-gold);
+            text-shadow: 0 0 10px var(--gold);
         }
 
         .cta-buttons {
@@ -152,22 +162,41 @@
 
         .btn {
             padding: 1rem 2rem;
-            border: 2px solid var(--neon-green);
+            border: 2px solid var(--gold);
             background: transparent;
-            color: var(--neon-green);
+            color: var(--gold);
             font-size: 1.1rem;
             border-radius: 50px;
             cursor: pointer;
             transition: all var(--transition-speed);
             text-decoration: none;
-            box-shadow: 0 0 10px var(--neon-green);
+            box-shadow: 0 0 10px var(--gold);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: all 0.6s ease;
+            z-index: -1;
         }
 
         .btn:hover {
-            background: var(--neon-green);
+            background: var(--gold);
             color: var(--dark-bg);
-            box-shadow: 0 0 20px var(--neon-green);
+            box-shadow: 0 0 20px var(--gold);
             transform: translateY(-5px);
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         /* Cards */
@@ -180,7 +209,7 @@
 
         .card {
             background: var(--card-bg);
-            border: 1px solid rgba(0, 255, 127, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 15px;
             padding: 1.5rem;
             transition: all var(--transition-speed);
@@ -198,15 +227,15 @@
             right: -2px;
             bottom: -2px;
             z-index: -1;
-            background: linear-gradient(45deg, transparent, transparent, var(--neon-green), transparent, transparent);
+            background: linear-gradient(45deg, transparent, transparent, var(--gold), transparent, transparent);
             opacity: 0;
             transition: opacity var(--transition-speed);
         }
 
         .card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 0 20px var(--neon-green);
-            border-color: var(--neon-green);
+            box-shadow: 0 0 20px var(--gold);
+            border-color: var(--gold);
         }
 
         .card:hover::before {
@@ -217,8 +246,8 @@
         .card-title {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--neon-green);
-            text-shadow: 0 0 8px var(--neon-green);
+            color: var(--gold);
+            text-shadow: 0 0 8px var(--gold);
         }
 
         /* Universe Section */
@@ -231,7 +260,7 @@
 
         /* Psychology Section */
         #psychology {
-            background: radial-gradient(circle, rgba(20, 20, 20, 0.9) 0%, var(--dark-bg) 100%);
+            background: radial-gradient(circle, rgba(30, 25, 10, 0.9) 0%, var(--dark-bg) 100%);
         }
 
         /* Projects Section */
@@ -243,12 +272,12 @@
         }
 
         .tag {
-            background: rgba(0, 255, 127, 0.2);
-            color: var(--neon-green);
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--gold);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.8rem;
-            border: 1px solid var(--neon-green);
+            border: 1px solid var(--gold);
         }
 
         /* Contact Section */
@@ -260,8 +289,8 @@
         .contact-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--neon-green);
-            text-shadow: 0 0 10px var(--neon-green);
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold);
         }
 
         .contact-link {
@@ -273,20 +302,21 @@
         }
 
         .contact-link:hover {
-            color: var(--neon-green);
-            text-shadow: 0 0 10px var(--neon-green);
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold);
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
-            border-top: 1px solid rgba(0, 255, 127, 0.2);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            background: rgba(10, 10, 10, 0.9);
         }
 
         .footer-text {
-            color: var(--neon-green);
-            text-shadow: 0 0 8px var(--neon-green);
+            color: var(--gold);
+            text-shadow: 0 0 8px var(--gold);
             margin-bottom: 1.5rem;
         }
 
@@ -303,8 +333,8 @@
         }
 
         .social-icons a:hover {
-            color: var(--neon-green);
-            text-shadow: 0 0 10px var(--neon-green);
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold);
             transform: translateY(-5px);
         }
 
@@ -327,6 +357,15 @@
             }
         }
 
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
         /* Particles */
         .particles-container {
             position: absolute;
@@ -340,11 +379,70 @@
 
         .particle {
             position: absolute;
-            background: rgba(0, 255, 127, 0.5);
+            background: rgba(255, 215, 0, 0.6);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+            box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold);
             animation: float 10s infinite ease-in-out;
         }
+
+        /* C++ Terminal */
+        .cpp-terminal {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-family: 'Courier New', monospace;
+            color: var(--light-gold);
+            box-shadow: 0 0 15px var(--gold);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 0.5rem;
+            margin-right: 1rem;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background-color: #ff5f56; }
+        .dot-yellow { background-color: #ffbd2e; }
+        .dot-green { background-color: #27c93f; }
+
+        .terminal-title {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .terminal-content {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .terminal-content pre {
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .comment { color: #57a64a; }
+        .keyword { color: #569cd6; }
+        .function { color: #dcdcaa; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -354,13 +452,13 @@
                 right: -100%;
                 height: 100vh;
                 width: 70%;
-                background: rgba(10, 10, 10, 0.95);
+                background: rgba(10, 10, 10, 0.98);
                 backdrop-filter: blur(10px);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 transition: right 0.5s ease;
-                border-left: 1px solid var(--neon-green);
+                border-left: 1px solid var(--gold);
             }
 
             .nav-links.active {
@@ -449,6 +547,41 @@
                 <p>Identifying habitable worlds beyond our solar system using transit photometry and radial velocity methods.</p>
             </div>
         </div>
+        
+        <!-- C++ Terminal Simulation -->
+        <div class="cpp-terminal">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                </div>
+                <div class="terminal-title">cosmic_simulator.cpp</div>
+            </div>
+            <div class="terminal-content">
+                <pre><span class="comment">// Running cosmic simulation...</span>
+<span class="keyword">#include</span> <span class="string">"cosmic_lib.h"</span>
+
+<span class="keyword">int</span> <span class="function">main</span>() {
+    <span class="function">initializeUniverse</span>();
+    
+    <span class="comment">// Generate 150 stars with random properties</span>
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">150</span>; i++) {
+        <span class="function">createStar</span>(
+            <span class="function">randomPosition</span>(),
+            <span class="function">randomSize</span>(<span class="number">1.0</span>, <span class="number">4.0</span>),
+            <span class="function">randomVelocity</span>(<span class="number">0.1</span>, <span class="number">1.0</span>)
+        );
+    }
+    
+    <span class="comment">// Calculate orbital mechanics</span>
+    <span class="function">calculateGravitationalInteractions</span>();
+    
+    <span class="function">renderSimulation</span>();
+    <span class="keyword">return</span> <span class="number">0</span>;
+}</pre>
+            </div>
+        </div>
     </section>
 
     <!-- Psychology Section -->
@@ -502,6 +635,45 @@
                     <span class="tag">TensorFlow</span>
                     <span class="tag">AI</span>
                 </div>
+            </div>
+        </div>
+        
+        <!-- C++ Terminal Simulation -->
+        <div class="cpp-terminal">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                </div>
+                <div class="terminal-title">neural_network.cpp</div>
+            </div>
+            <div class="terminal-content">
+                <pre><span class="comment">// Training neural network model...</span>
+<span class="keyword">void</span> <span class="function">trainModel</span>(Model &model, Dataset &data) {
+    <span class="keyword">int</span> epochs = <span class="number">1000</span>;
+    <span class="keyword">double</span> learning_rate = <span class="number">0.01</span>;
+    
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < epochs; i++) {
+        <span class="keyword">double</span> loss = <span class="number">0.0</span>;
+        
+        <span class="keyword">for</span> (Example &example : data) {
+            <span class="comment">// Forward propagation</span>
+            Vector output = <span class="function">forwardPass</span>(model, example.input);
+            
+            <span class="comment">// Calculate loss</span>
+            loss += <span class="function">computeLoss</span>(output, example.target);
+            
+            <span class="comment">// Backward propagation</span>
+            <span class="function">backwardPass</span>(model, example.input, output);
+            
+            <span class="comment">// Update weights</span>
+            <span class="function">updateWeights</span>(model, learning_rate);
+        }
+        
+        <span class="function">printf</span>(<span class="string">"Epoch %d: Loss = %.4f\n"</span>, i, loss / data.size());
+    }
+}</pre>
             </div>
         </div>
     </section>
@@ -608,16 +780,37 @@
 
         // Create particles for each section
         window.addEventListener('load', () => {
-            createParticles('home-particles', 100, [2, 3, 4]);
-            createParticles('universe-particles', 150, [1, 2, 3, 4]);
-            createParticles('psychology-particles', 80, [2, 3]);
-            createParticles('projects-particles', 120, [2, 3, 4]);
-            createParticles('contact-particles', 60, [1, 2, 3]);
+            createParticles('home-particles', 80, [2, 3, 4]);
+            createParticles('universe-particles', 120, [1, 2, 3, 4]);
+            createParticles('psychology-particles', 60, [2, 3]);
+            createParticles('projects-particles', 100, [2, 3, 4]);
+            createParticles('contact-particles', 50, [1, 2, 3]);
         });
 
-        // Simulate C++ integration
+        // Simulate C++ integration with terminal output
         function simulateCppIntegration() {
             console.log("Simulating C++ integration for cosmic calculations...");
+            
+            // Simulate terminal output
+            const terminals = document.querySelectorAll('.terminal-content');
+            
+            // Typewriter effect for terminal content
+            terminals.forEach(terminal => {
+                const content = terminal.innerHTML;
+                terminal.innerHTML = '';
+                
+                let i = 0;
+                const typeWriter = () => {
+                    if (i < content.length) {
+                        terminal.innerHTML += content.charAt(i);
+                        i++;
+                        terminal.scrollTop = terminal.scrollHeight;
+                        setTimeout(typeWriter, 10);
+                    }
+                };
+                
+                setTimeout(typeWriter, 1000);
+            });
             
             // This would normally be fetched from a server running the C++ code
             const simulationData = {
@@ -625,21 +818,17 @@
                     {x: 100, y: 200, size: 3, speed: 0.7},
                     {x: 300, y: 150, size: 2, speed: 0.9},
                     {x: 500, y: 300, size: 4, speed: 0.5},
-                    // More simulated data points...
                 ],
                 orbits: [
                     {centerX: 400, centerY: 300, radius: 150, speed: 0.03},
-                    // More orbital paths...
                 ]
             };
             
-            // In a real implementation, this data would be used to visualize
-            // the cosmic simulations calculated by the C++ code
             console.log("Simulation data received:", simulationData);
         }
 
         // Initialize the simulation
-        simulateCppIntegration();
+        setTimeout(simulateCppIntegration, 1500);
     </script>
 </body>
-</html>
+                                          </html>
