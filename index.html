@@ -3,39 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zain Malik | Cosmic Explorer & Psychology Strategist</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <title>Zain Malik | Cosmic Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --dark-bg: #0a0a0a;
-            --golden: #FFD700;
             --neon-green: #00FF7F;
-            --golden-glow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6);
-            --green-glow: 0 0 10px rgba(0, 255, 127, 0.8), 0 0 20px rgba(0, 255, 127, 0.6);
-            --golden-green-glow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(0, 255, 127, 0.4);
-            --transition: all 0.4s ease;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(15, 15, 15, 0.7);
+            --glow-intensity: 2px;
+            --transition-speed: 0.3s;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
             background-color: var(--dark-bg);
             color: white;
-            line-height: 1.6;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 60%, rgba(0, 255, 127, 0.05) 0%, transparent 20%);
+            line-height: 1.6;
         }
 
         /* Navigation */
-        .navbar {
+        nav {
             position: fixed;
             top: 0;
             width: 100%;
@@ -43,43 +37,37 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 5%;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(10px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 127, 0.2);
         }
 
         .logo {
             font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--golden), var(--neon-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: var(--golden-green-glow);
+            font-weight: bold;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            letter-spacing: 2px;
         }
 
         .nav-links {
             display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin: 0 1.2rem;
+            gap: 2rem;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
-            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all var(--transition-speed);
             position: relative;
             padding: 0.5rem 0;
-            transition: var(--transition);
         }
 
         .nav-links a:hover {
-            color: var(--golden);
-            text-shadow: var(--golden-glow);
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
         }
 
         .nav-links a::after {
@@ -89,8 +77,9 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--golden), var(--neon-green));
-            transition: var(--transition);
+            background: var(--neon-green);
+            box-shadow: 0 0 8px var(--neon-green);
+            transition: width var(--transition-speed);
         }
 
         .nav-links a:hover::after {
@@ -99,15 +88,20 @@
 
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
-            color: white;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
             cursor: pointer;
-            transition: var(--transition);
         }
 
-        .menu-toggle:hover {
-            color: var(--neon-green);
-            text-shadow: var(--green-glow);
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background-color: var(--neon-green);
+            border-radius: 3px;
+            transition: all var(--transition-speed);
+            box-shadow: 0 0 5px var(--neon-green);
         }
 
         /* Sections */
@@ -122,61 +116,33 @@
             font-size: 2.5rem;
             margin-bottom: 3rem;
             text-align: center;
-            background: linear-gradient(45deg, var(--golden), var(--neon-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: var(--golden-green-glow);
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+            color: var(--neon-green);
+            text-shadow: 0 0 15px var(--neon-green);
+            letter-spacing: 2px;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--golden), var(--neon-green));
-            box-shadow: var(--golden-green-glow);
-        }
-
-        /* Home/Hero Section */
+        /* Hero Section */
         #home {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
         .hero-title {
-            font-size: 5rem;
-            font-weight: 700;
+            font-size: 4rem;
             margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--golden), var(--neon-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: var(--golden-green-glow);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -100% 0; }
-            100% { background-position: 200% 0; }
+            color: white;
+            text-shadow: 0 0 20px var(--neon-green);
         }
 
         .hero-subtitle {
             font-size: 1.8rem;
             margin-bottom: 3rem;
             max-width: 800px;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
         }
 
         .cta-buttons {
@@ -186,289 +152,142 @@
 
         .btn {
             padding: 1rem 2rem;
+            border: 2px solid var(--neon-green);
+            background: transparent;
+            color: var(--neon-green);
+            font-size: 1.1rem;
             border-radius: 50px;
-            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
             text-decoration: none;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, var(--golden), var(--neon-green));
-            color: var(--dark-bg);
-            box-shadow: var(--golden-green-glow);
-        }
-
-        .btn-outline {
-            border: 2px solid var(--golden);
-            color: var(--golden);
-            box-shadow: var(--golden-glow);
+            box-shadow: 0 0 10px var(--neon-green);
         }
 
         .btn:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-green);
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .btn-primary:hover {
-            background: linear-gradient(45deg, var(--neon-green), var(--golden));
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .btn-outline:hover {
-            background: rgba(255, 215, 0, 0.1);
-            color: var(--neon-green);
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 255, 127, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all var(--transition-speed);
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            background: linear-gradient(45deg, transparent, transparent, var(--neon-green), transparent, transparent);
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 20px var(--neon-green);
             border-color: var(--neon-green);
-            box-shadow: var(--green-glow);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+            animation: borderLight 2s linear infinite;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 8px var(--neon-green);
         }
 
         /* Universe Section */
-        .universe-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .cosmic-card {
-            background: rgba(20, 20, 20, 0.7);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        .cosmic-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--neon-green);
-            box-shadow: var(--green-glow);
-        }
-
-        .cosmic-img {
-            height: 200px;
-            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cosmic-content {
-            padding: 1.5rem;
-        }
-
-        .cosmic-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--golden);
-            text-shadow: var(--golden-glow);
-        }
-
-        .cosmic-desc {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 1rem;
+        .universe-card {
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         /* Psychology Section */
-        .psychology-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .psych-card {
-            background: rgba(20, 20, 20, 0.7);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: var(--transition);
-            border: 1px solid rgba(0, 255, 127, 0.2);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .psych-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--golden);
-            box-shadow: var(--golden-glow);
-        }
-
-        .psych-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 127, 0.05), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .psych-card:hover::before {
-            transform: translateX(100%);
-        }
-
-        .psych-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--neon-green);
-            text-shadow: var(--green-glow);
+        #psychology {
+            background: radial-gradient(circle, rgba(20, 20, 20, 0.9) 0%, var(--dark-bg) 100%);
         }
 
         /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .project-card {
-            background: rgba(20, 20, 20, 0.7);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--neon-green);
-            box-shadow: var(--green-glow);
-        }
-
-        .project-img {
-            height: 200px;
-            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--golden);
-            text-shadow: var(--golden-glow);
-        }
-
-        .project-desc {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 1rem;
-        }
-
         .project-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin: 1rem 0;
         }
 
         .tag {
+            background: rgba(0, 255, 127, 0.2);
+            color: var(--neon-green);
             padding: 0.3rem 0.8rem;
-            background: rgba(0, 255, 127, 0.1);
             border-radius: 20px;
             font-size: 0.8rem;
-            color: var(--neon-green);
-            border: 1px solid rgba(0, 255, 127, 0.3);
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-link {
-            color: var(--golden);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: var(--transition);
-        }
-
-        .project-link:hover {
-            color: var(--neon-green);
-            text-shadow: var(--green-glow);
+            border: 1px solid var(--neon-green);
         }
 
         /* Contact Section */
-        .contact-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
         .contact-card {
-            background: rgba(20, 20, 20, 0.7);
-            border-radius: 15px;
-            padding: 2rem;
             text-align: center;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .contact-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--neon-green);
-            box-shadow: var(--green-glow);
+            padding: 2rem;
         }
 
         .contact-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--golden);
-            text-shadow: var(--golden-glow);
-        }
-
-        .contact-card:hover .contact-icon {
             color: var(--neon-green);
-            text-shadow: var(--green-glow);
+            text-shadow: 0 0 10px var(--neon-green);
         }
 
-        .contact-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+        .contact-link {
             color: white;
-        }
-
-        .contact-info {
-            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            transition: var(--transition);
+            transition: all var(--transition-speed);
+            display: block;
+            margin-top: 1rem;
         }
 
-        .contact-info:hover {
-            color: var(--golden);
-            text-shadow: var(--golden-glow);
+        .contact-link:hover {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
         }
 
         /* Footer */
         footer {
-            background: rgba(10, 10, 10, 0.9);
-            padding: 2rem 5%;
             text-align: center;
-            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 2rem;
+            border-top: 1px solid rgba(0, 255, 127, 0.2);
         }
 
         .footer-text {
+            color: var(--neon-green);
+            text-shadow: 0 0 8px var(--neon-green);
             margin-bottom: 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .footer-text span {
-            background: linear-gradient(45deg, var(--golden), var(--neon-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: var(--golden-green-glow);
         }
 
         .social-icons {
@@ -477,241 +296,211 @@
             gap: 1.5rem;
         }
 
-        .social-icon {
+        .social-icons a {
             color: white;
             font-size: 1.5rem;
-            transition: var(--transition);
+            transition: all var(--transition-speed);
         }
 
-        .social-icon:hover {
-            color: var(--golden);
-            text-shadow: var(--golden-glow);
+        .social-icons a:hover {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
             transform: translateY(-5px);
         }
 
-        /* Animations and Particles */
-        .particles {
+        /* Animations */
+        @keyframes borderLight {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Particles */
+        .particles-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
+            overflow: hidden;
             z-index: -1;
         }
 
         .particle {
             position: absolute;
-            background: var(--golden);
+            background: rgba(0, 255, 127, 0.5);
             border-radius: 50%;
-            opacity: 0.7;
-            animation: float 15s infinite linear;
+            box-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+            animation: float 10s infinite ease-in-out;
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100vw) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 4rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.5rem;
-            }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem 5%;
-            }
-            
             .nav-links {
                 position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
                 background: rgba(10, 10, 10, 0.95);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: var(--transition);
                 backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.5s ease;
+                border-left: 1px solid var(--neon-green);
             }
-            
+
             .nav-links.active {
-                left: 0;
+                right: 0;
             }
-            
-            .nav-links li {
-                margin: 1.5rem 0;
-            }
-            
+
             .menu-toggle {
-                display: block;
+                display: flex;
+                z-index: 1001;
             }
-            
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
             .hero-title {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
-            
+
             .hero-subtitle {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
-            
+
             .cta-buttons {
                 flex-direction: column;
             }
-        }
 
-        @media (max-width: 576px) {
             .section-title {
                 font-size: 2rem;
-            }
-            
-            .hero-title {
-                font-size: 2.5rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav>
         <div class="logo">Zain Malik</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#universe">Universe</a></li>
-            <li><a href="#psychology">Psychology</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#universe">Universe</a>
+            <a href="#psychology">Psychology</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
         <div class="menu-toggle">
-            <i class="fas fa-bars"></i>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </nav>
 
-    <!-- Home/Hero Section -->
+    <!-- Hero Section -->
     <section id="home">
-        <div class="particles" id="particles-1"></div>
+        <div class="particles-container" id="home-particles"></div>
         <h1 class="hero-title">Zain Malik</h1>
         <p class="hero-subtitle">Explorer of infinite knowledge | Cosmic observer | Psychology strategist</p>
         <div class="cta-buttons">
-            <a href="#projects" class="btn btn-primary">View Projects</a>
-            <a href="#contact" class="btn btn-outline">Contact Me</a>
+            <a href="#projects" class="btn">View Projects</a>
+            <a href="#contact" class="btn">Contact Me</a>
         </div>
     </section>
 
     <!-- Universe Section -->
     <section id="universe">
-        <h2 class="section-title">Cosmic Universe</h2>
-        <div class="particles" id="particles-2"></div>
-        <div class="universe-grid">
-            <div class="cosmic-card">
-                <div class="cosmic-img"></div>
-                <div class="cosmic-content">
-                    <h3 class="cosmic-title">Nebula Exploration</h3>
-                    <p class="cosmic-desc">Discover the beauty and mysteries of stellar nurseries where stars are born.</p>
-                </div>
+        <div class="particles-container" id="universe-particles"></div>
+        <h2 class="section-title">Cosmic Exploration</h2>
+        <div class="card-grid">
+            <div class="card universe-card">
+                <h3 class="card-title">Nebula Formation</h3>
+                <p>Studying the birth of stars in stellar nurseries and the complex dynamics of interstellar gas clouds.</p>
             </div>
-            <div class="cosmic-card">
-                <div class="cosmic-img"></div>
-                <div class="cosmic-content">
-                    <h3 class="cosmic-title">Quantum Realms</h3>
-                    <p class="cosmic-desc">Exploring the fascinating world of quantum mechanics and its cosmic implications.</p>
-                </div>
+            <div class="card universe-card">
+                <h3 class="card-title">Black Hole Dynamics</h3>
+                <p>Exploring event horizons, gravitational lensing, and the information paradox of singularities.</p>
             </div>
-            <div class="cosmic-card">
-                <div class="cosmic-img"></div>
-                <div class="cosmic-content">
-                    <h3 class="cosmic-title">Black Holes</h3>
-                    <p class="cosmic-desc">Unraveling the secrets of spacetime singularities and their gravitational mysteries.</p>
-                </div>
+            <div class="card universe-card">
+                <h3 class="card-title">Exoplanet Discovery</h3>
+                <p>Identifying habitable worlds beyond our solar system using transit photometry and radial velocity methods.</p>
             </div>
         </div>
     </section>
 
     <!-- Psychology Section -->
     <section id="psychology">
-        <h2 class="section-title">Mind Psychology</h2>
-        <div class="particles" id="particles-3"></div>
-        <div class="psychology-container">
-            <div class="psych-card">
-                <h3 class="psych-title">Cognitive Patterns</h3>
-                <p>Understanding how thought processes shape our perception of reality and influence decision-making.</p>
+        <div class="particles-container" id="psychology-particles"></div>
+        <h2 class="section-title">Cognitive Patterns</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3 class="card-title">Behavioral Economics</h3>
+                <p>Researching cognitive biases in decision-making and their impact on economic systems.</p>
             </div>
-            <div class="psych-card">
-                <h3 class="psych-title">Behavioral Science</h3>
-                <p>Exploring the complex relationship between environment, stimuli, and human behavior responses.</p>
+            <div class="card">
+                <h3 class="card-title">Neural Networks</h3>
+                <p>Mapping the connection between artificial intelligence and human neural pathways.</p>
             </div>
-            <div class="psych-card">
-                <h3 class="psych-title">Neural Networks</h3>
-                <p>Drawing parallels between artificial intelligence and the human brain's interconnected neural pathways.</p>
+            <div class="card">
+                <h3 class="card-title">Social Psychology</h3>
+                <p>Analyzing group dynamics, conformity, and the psychology of collective intelligence.</p>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
     <section id="projects">
-        <h2 class="section-title">Cosmic Projects</h2>
-        <div class="particles" id="particles-4"></div>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-img"></div>
-                <div class="project-content">
-                    <h3 class="project-title">Quantum AI Interface</h3>
-                    <p class="project-desc">An AI system designed to simulate quantum computing processes for problem-solving.</p>
-                    <div class="project-tags">
-                        <span class="tag">AI</span>
-                        <span class="tag">Quantum Computing</span>
-                        <span class="tag">Neural Networks</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                        <a href="#" class="project-link"><i class="fab fa-youtube"></i> Demo</a>
-                    </div>
+        <div class="particles-container" id="projects-particles"></div>
+        <h2 class="section-title">Projects</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3 class="card-title">Cosmic Simulation Engine</h3>
+                <p>A real-time simulation of celestial mechanics with accurate gravitational interactions.</p>
+                <div class="project-tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">OpenGL</span>
+                    <span class="tag">Physics</span>
                 </div>
             </div>
-            <div class="project-card">
-                <div class="project-img"></div>
-                <div class="project-content">
-                    <h3 class="project-title">Cognitive Behavior Framework</h3>
-                    <p class="project-desc">A digital platform for analyzing and improving cognitive behavioral patterns.</p>
-                    <div class="project-tags">
-                        <span class="tag">Psychology</span>
-                        <span class="tag">Behavioral Science</span>
-                        <span class="tag">UI/UX</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                        <a href="#" class="project-link"><i class="fab fa-youtube"></i> Demo</a>
-                    </div>
+            <div class="card">
+                <h3 class="card-title">Cognitive Bias Visualizer</h3>
+                <p>An interactive platform demonstrating common cognitive biases with real-world examples.</p>
+                <div class="project-tags">
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">D3.js</span>
+                    <span class="tag">Psychology</span>
                 </div>
             </div>
-            <div class="project-card">
-                <div class="project-img"></div>
-                <div class="project-content">
-                    <h3 class="project-title">Cosmic Visualization Engine</h3>
-                    <p class="project-desc">3D visualization of celestial bodies and cosmic phenomena with real-time data.</p>
-                    <div class="project-tags">
-                        <span class="tag">WebGL</span>
-                        <span class="tag">Astronomy</span>
-                        <span class="tag">Data Visualization</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                        <a href="#" class="project-link"><i class="fab fa-youtube"></i> Demo</a>
-                    </div>
+            <div class="card">
+                <h3 class="card-title">Neural Network Explorer</h3>
+                <p>A educational tool for visualizing and understanding artificial neural networks.</p>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">TensorFlow</span>
+                    <span class="tag">AI</span>
                 </div>
             </div>
         </div>
@@ -719,54 +508,76 @@
 
     <!-- Contact Section -->
     <section id="contact">
-        <h2 class="section-title">Contact Me</h2>
-        <div class="particles" id="particles-5"></div>
-        <div class="contact-container">
-            <div class="contact-card">
-                <div class="contact-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <h3 class="contact-title">Email</h3>
-                <a href="mailto:zain@cosmicexplorer.com" class="contact-info">zain@cosmicexplorer.com</a>
+        <div class="particles-container" id="contact-particles"></div>
+        <h2 class="section-title">Connect With Me</h2>
+        <div class="card-grid">
+            <div class="card contact-card">
+                <i class="fas fa-envelope contact-icon"></i>
+                <h3 class="card-title">Email</h3>
+                <a href="mailto:unknownuz123@gmail.com" class="contact-link">unknownuz123@gmail.com</a>
             </div>
-            <div class="contact-card">
-                <div class="contact-icon">
-                    <i class="fab fa-discord"></i>
-                </div>
-                <h3 class="contact-title">Discord</h3>
-                <p class="contact-info">ZainMalik#7890</p>
+            <div class="card contact-card">
+                <i class="fab fa-discord contact-icon"></i>
+                <h3 class="card-title">Discord</h3>
+                <a href="https://discord.gg/x6mQzyDvv5" class="contact-link" target="_blank">Join Server</a>
             </div>
-            <div class="contact-card">
-                <div class="contact-icon">
-                    <i class="fab fa-youtube"></i>
-                </div>
-                <h3 class="contact-title">YouTube</h3>
-                <a href="#" class="contact-info">Cosmic Explorer</a>
-            </div>
-            <div class="contact-card">
-                <div class="contact-icon">
-                    <i class="fab fa-github"></i>
-                </div>
-                <h3 class="contact-title">GitHub</h3>
-                <a href="#" class="contact-info">ZainCosmic</a>
+            <div class="card contact-card">
+                <i class="fab fa-youtube contact-icon"></i>
+                <h3 class="card-title">YouTube</h3>
+                <a href="https://youtube.com/@toknowtheworldd?si=3jkMCCCAZCpFeKJg" class="contact-link" target="_blank">To Know The World</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p class="footer-text">Designed & Built by <span>Zain Malik</span> © 2023</p>
+        <p class="footer-text">Designed & Built by Zain Malik © 2025</p>
         <div class="social-icons">
-            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
         </div>
     </footer>
 
     <script>
-        // Create floating particles
-        function createParticles(containerId, count, colors, sizes) {
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Particle Animation
+        function createParticles(containerId, count, sizes) {
             const container = document.getElementById(containerId);
             if (!container) return;
             
@@ -774,69 +585,61 @@
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                // Random properties
-                const size = Math.random() * (sizes[1] - sizes[0]) + sizes[0];
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                
-                // Apply properties
+                // Random size
+                const size = sizes[Math.floor(Math.random() * sizes.length)];
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
-                particle.style.background = color;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${15 + Math.random() * 20}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                particle.style.left = `${x}%`;
+                particle.style.top = `${y}%`;
+                
+                // Random animation delay and duration
+                const delay = Math.random() * 5;
+                const duration = 10 + Math.random() * 10;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
                 
                 container.appendChild(particle);
             }
         }
-        
-        // Initialize particles for each section
-        document.addEventListener('DOMContentLoaded', function() {
-            const goldenColor = 'rgba(255, 215, 0, 0.7)';
-            const greenColor = 'rgba(0, 255, 127, 0.7)';
-            const colors = [goldenColor, greenColor];
-            const sizes = [3, 8];
-            
-            createParticles('particles-1', 50, colors, sizes);
-            createParticles('particles-2', 40, colors, sizes);
-            createParticles('particles-3', 35, colors, sizes);
-            createParticles('particles-4', 45, colors, sizes);
-            createParticles('particles-5', 30, colors, sizes);
-            
-            // Mobile menu toggle
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            
-            if (menuToggle && navLinks) {
-                menuToggle.addEventListener('click', function() {
-                    navLinks.classList.toggle('active');
-                });
-            }
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        // Close mobile menu if open
-                        if (navLinks.classList.contains('active')) {
-                            navLinks.classList.remove('active');
-                        }
-                        
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+
+        // Create particles for each section
+        window.addEventListener('load', () => {
+            createParticles('home-particles', 100, [2, 3, 4]);
+            createParticles('universe-particles', 150, [1, 2, 3, 4]);
+            createParticles('psychology-particles', 80, [2, 3]);
+            createParticles('projects-particles', 120, [2, 3, 4]);
+            createParticles('contact-particles', 60, [1, 2, 3]);
         });
+
+        // Simulate C++ integration
+        function simulateCppIntegration() {
+            console.log("Simulating C++ integration for cosmic calculations...");
+            
+            // This would normally be fetched from a server running the C++ code
+            const simulationData = {
+                stars: [
+                    {x: 100, y: 200, size: 3, speed: 0.7},
+                    {x: 300, y: 150, size: 2, speed: 0.9},
+                    {x: 500, y: 300, size: 4, speed: 0.5},
+                    // More simulated data points...
+                ],
+                orbits: [
+                    {centerX: 400, centerY: 300, radius: 150, speed: 0.03},
+                    // More orbital paths...
+                ]
+            };
+            
+            // In a real implementation, this data would be used to visualize
+            // the cosmic simulations calculated by the C++ code
+            console.log("Simulation data received:", simulationData);
+        }
+
+        // Initialize the simulation
+        simulateCppIntegration();
     </script>
 </body>
-                        </html>
+</html>
