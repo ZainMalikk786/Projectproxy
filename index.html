@@ -12,8 +12,8 @@
             --light-gold: #FFEA80;
             --dark-bg: #0a0a0a;
             --card-bg: rgba(25, 20, 5, 0.85);
-            --glow-intensity: 3px;
             --transition-speed: 0.4s;
+            --theme-name: 'cosmic';
         }
 
         * {
@@ -28,10 +28,19 @@
             color: white;
             overflow-x: hidden;
             line-height: 1.6;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 60%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 50% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 20%);
+            transition: background-color 0.5s ease;
+        }
+
+        /* Cosmic background effect */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(ellipse at center, rgba(40, 30, 5, 0.4) 0%, var(--dark-bg) 70%);
+            transition: all 0.5s ease;
         }
 
         /* Navigation */
@@ -107,7 +116,71 @@
             background-color: var(--gold);
             border-radius: 3px;
             transition: all var(--transition-speed);
-            box-shadow: 0 0 5px var(--gold);
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid var(--gold);
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        .theme-switcher i {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .theme-options {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background: rgba(10, 10, 10, 0.9);
+            border-radius: 10px;
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            border: 1px solid var(--gold);
+        }
+
+        .theme-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .theme-option:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-option.active {
+            border-color: white;
+        }
+
+        .theme-cosmic {
+            background: linear-gradient(135deg, #0a0a0a, #2a1a35);
+        }
+
+        .theme-dark {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2a);
+        }
+
+        .theme-light {
+            background: linear-gradient(135deg, #f5f5f5, #ddd);
         }
 
         /* Sections */
@@ -134,7 +207,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: radial-gradient(ellipse at center, rgba(40, 30, 5, 0.4) 0%, var(--dark-bg) 70%);
         }
 
         .hero-title {
@@ -176,27 +248,11 @@
             z-index: 1;
         }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
-            transition: all 0.6s ease;
-            z-index: -1;
-        }
-
         .btn:hover {
             background: var(--gold);
             color: var(--dark-bg);
             box-shadow: 0 0 20px var(--gold);
             transform: translateY(-5px);
-        }
-
-        .btn:hover::before {
-            left: 100%;
         }
 
         /* Cards */
@@ -219,48 +275,44 @@
             z-index: 2;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            z-index: -1;
-            background: linear-gradient(45deg, transparent, transparent, var(--gold), transparent, transparent);
-            opacity: 0;
-            transition: opacity var(--transition-speed);
-        }
-
         .card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-10px);
             box-shadow: 0 0 20px var(--gold);
             border-color: var(--gold);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-            animation: borderLight 2s linear infinite;
         }
 
         .card-title {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: var(--gold);
-            text-shadow: 0 0 8px var(--gold);
         }
 
-        /* Universe Section */
-        .universe-card {
-            height: 300px;
+        /* Live Feed Cards */
+        .live-feed {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        /* Psychology Section */
-        #psychology {
-            background: radial-gradient(circle, rgba(30, 25, 10, 0.9) 0%, var(--dark-bg) 100%);
+        .feed-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .feed-item:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateX(5px);
+        }
+
+        .feed-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
         }
 
         /* Projects Section */
@@ -290,7 +342,6 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--gold);
-            text-shadow: 0 0 10px var(--gold);
         }
 
         .contact-link {
@@ -303,7 +354,6 @@
 
         .contact-link:hover {
             color: var(--gold);
-            text-shadow: 0 0 10px var(--gold);
         }
 
         /* Footer */
@@ -316,7 +366,6 @@
 
         .footer-text {
             color: var(--gold);
-            text-shadow: 0 0 8px var(--gold);
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
         }
@@ -335,20 +384,10 @@
 
         .social-icons a:hover {
             color: var(--gold);
-            text-shadow: 0 0 10px var(--gold);
             transform: translateY(-5px);
         }
 
         /* Animations */
-        @keyframes borderLight {
-            0% {
-                filter: hue-rotate(0deg);
-            }
-            100% {
-                filter: hue-rotate(360deg);
-            }
-        }
-
         @keyframes float {
             0%, 100% {
                 transform: translateY(0);
@@ -373,8 +412,8 @@
             position: absolute;
             background: rgba(255, 215, 0, 0.6);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold);
             animation: float 10s infinite ease-in-out;
+            transition: transform 0.3s ease;
         }
 
         /* C++ Terminal */
@@ -388,7 +427,6 @@
             color: var(--light-gold);
             box-shadow: 0 0 15px var(--gold);
             overflow: hidden;
-            position: relative;
         }
 
         .terminal-header {
@@ -435,6 +473,139 @@
         .function { color: #dcdcaa; }
         .string { color: #ce9178; }
         .number { color: #b5cea8; }
+
+        /* 3D Objects Container */
+        .webgl-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* AI Assistant */
+        .ai-assistant {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 0 15px var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .ai-assistant:hover {
+            transform: scale(1.1);
+        }
+
+        .ai-assistant i {
+            color: var(--dark-bg);
+            font-size: 1.5rem;
+        }
+
+        .ai-chat {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            width: 300px;
+            height: 400px;
+            background: rgba(10, 10, 10, 0.9);
+            border-radius: 15px;
+            border: 1px solid var(--gold);
+            box-shadow: 0 0 20px var(--gold);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .ai-header {
+            padding: 15px;
+            background: rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid var(--gold);
+            text-align: center;
+            font-weight: bold;
+            color: var(--gold);
+        }
+
+        .ai-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ai-message {
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .ai-message.bot {
+            background: rgba(255, 215, 0, 0.2);
+            align-self: flex-start;
+        }
+
+        .ai-message.user {
+            background: rgba(255, 255, 255, 0.1);
+            align-self: flex-end;
+        }
+
+        .ai-input {
+            padding: 15px;
+            border-top: 1px solid var(--gold);
+            display: flex;
+            gap: 10px;
+        }
+
+        .ai-input input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid var(--gold);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .ai-input button {
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: none;
+            background: var(--gold);
+            color: var(--dark-bg);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Stats Counter */
+        .stats-counter {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(10, 10, 10, 0.8);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid var(--gold);
+            box-shadow: 0 0 10px var(--gold);
+            z-index: 1000;
+            font-size: 0.9rem;
+        }
+
+        .stats-counter span {
+            color: var(--gold);
+            font-weight: bold;
+        }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -493,10 +664,28 @@
             .card-grid {
                 grid-template-columns: 1fr;
             }
+
+            .ai-chat {
+                width: 90%;
+                left: 5%;
+                bottom: 80px;
+            }
+
+            .stats-counter {
+                top: 70px;
+                right: 10px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Cosmic Background -->
+    <div class="cosmic-bg"></div>
+
+    <!-- 3D Objects Container -->
+    <div class="webgl-container" id="webgl-container"></div>
+
     <!-- Navigation -->
     <nav>
         <div class="logo">Zain Malik</div>
@@ -513,6 +702,38 @@
             <span></span>
         </div>
     </nav>
+
+    <!-- Stats Counter -->
+    <div class="stats-counter">
+        Visitors: <span id="visitor-count">1</span> | 
+        GitHub: <span id="github-stats">0</span>
+    </div>
+
+    <!-- AI Assistant -->
+    <div class="ai-assistant">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="ai-chat" id="ai-chat">
+        <div class="ai-header">Cosmic Assistant</div>
+        <div class="ai-messages" id="ai-messages">
+            <div class="ai-message bot">Hello! I'm your cosmic assistant. How can I help you explore today?</div>
+        </div>
+        <div class="ai-input">
+            <input type="text" id="ai-input" placeholder="Ask something...">
+            <button id="ai-send"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher" id="theme-switcher">
+        <i class="fas fa-palette"></i>
+        <div class="theme-options" id="theme-options">
+            <div class="theme-option theme-cosmic active" data-theme="cosmic"></div>
+            <div class="theme-option theme-dark" data-theme="dark"></div>
+            <div class="theme-option theme-light" data-theme="light"></div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home">
@@ -588,14 +809,44 @@
             <div class="card">
                 <h3 class="card-title">Behavioral Economics</h3>
                 <p>Researching cognitive biases in decision-making and their impact on economic systems.</p>
+                <div class="live-feed">
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-book"></i>
+                        <span>Reading: Thinking, Fast and Slow</span>
+                    </div>
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-chart-line"></i>
+                        <span>Research: Cognitive biases in market trends</span>
+                    </div>
+                </div>
             </div>
             <div class="card">
                 <h3 class="card-title">Neural Networks</h3>
                 <p>Mapping the connection between artificial intelligence and human neural pathways.</p>
+                <div class="live-feed">
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-code-branch"></i>
+                        <span>Latest commit: Improved neural network model</span>
+                    </div>
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-brain"></i>
+                        <span>Research: Neural plasticity in AI systems</span>
+                    </div>
+                </div>
             </div>
             <div class="card">
                 <h3 class="card-title">Social Psychology</h3>
                 <p>Analyzing group dynamics, conformity, and the psychology of collective intelligence.</p>
+                <div class="live-feed">
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-users"></i>
+                        <span>Study: Group behavior in online communities</span>
+                    </div>
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-comments"></i>
+                        <span>Research: Communication patterns in teams</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -613,6 +864,16 @@
                     <span class="tag">OpenGL</span>
                     <span class="tag">Physics</span>
                 </div>
+                <div class="live-feed">
+                    <div class="feed-item">
+                        <i class="feed-icon fab fa-github"></i>
+                        <span>Last updated: 2 days ago</span>
+                    </div>
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-code"></i>
+                        <span>Stars: 24 | Forks: 8</span>
+                    </div>
+                </div>
             </div>
             <div class="card">
                 <h3 class="card-title">Cognitive Bias Visualizer</h3>
@@ -621,6 +882,16 @@
                     <span class="tag">JavaScript</span>
                     <span class="tag">D3.js</span>
                     <span class="tag">Psychology</span>
+                </div>
+                <div class="live-feed">
+                    <div class="feed-item">
+                        <i class="feed-icon fab fa-github"></i>
+                        <span>Last updated: 1 week ago</span>
+                    </div>
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-code"></i>
+                        <span>Stars: 42 | Forks: 12</span>
+                    </div>
                 </div>
             </div>
             <div class="card">
@@ -631,45 +902,16 @@
                     <span class="tag">TensorFlow</span>
                     <span class="tag">AI</span>
                 </div>
-            </div>
-        </div>
-        
-        <!-- C++ Terminal Simulation -->
-        <div class="cpp-terminal">
-            <div class="terminal-header">
-                <div class="terminal-dots">
-                    <div class="terminal-dot dot-red"></div>
-                    <div class="terminal-dot dot-yellow"></div>
-                    <div class="terminal-dot dot-green"></div>
+                <div class="live-feed">
+                    <div class="feed-item">
+                        <i class="feed-icon fab fa-github"></i>
+                        <span>Last updated: 3 days ago</span>
+                    </div>
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-code"></i>
+                        <span>Stars: 37 | Forks: 15</span>
+                    </div>
                 </div>
-                <div class="terminal-title">neural_network.cpp</div>
-            </div>
-            <div class="terminal-content">
-                <pre><span class="comment">// Training neural network model...</span>
-<span class="keyword">void</span> <span class="function">trainModel</span>(Model &model, Dataset &data) {
-    <span class="keyword">int</span> epochs = <span class="number">1000</span>;
-    <span class="keyword">double</span> learning_rate = <span class="number">0.01</span>;
-    
-    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < epochs; i++) {
-        <span class="keyword">double</span> loss = <span class="number">0.0</span>;
-        
-        <span class="keyword">for</span> (Example &example : data) {
-            <span class="comment">// Forward propagation</span>
-            Vector output = <span class="function">forwardPass</span>(model, example.input);
-            
-            <span class="comment">// Calculate loss</span>
-            loss += <span class="function">computeLoss</span>(output, example.target);
-            
-            <span class="comment">// Backward propagation</span>
-            <span class="function">backwardPass</span>(model, example.input, output);
-            
-            <span class="comment">// Update weights</span>
-            <span class="function">updateWeights</span>(model, learning_rate);
-        }
-        
-        <span class="function">printf</span>(<span class="string">"Epoch %d: Loss = %.4f\n"</span>, i, loss / data.size());
-    }
-}</pre>
             </div>
         </div>
     </section>
@@ -683,16 +925,38 @@
                 <i class="fas fa-envelope contact-icon"></i>
                 <h3 class="card-title">Email</h3>
                 <a href="mailto:unknownuz123@gmail.com" class="contact-link">unknownuz123@gmail.com</a>
+                <div class="live-feed">
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-clock"></i>
+                        <span>Response time: < 24 hours</span>
+                    </div>
+                </div>
             </div>
             <div class="card contact-card">
                 <i class="fab fa-discord contact-icon"></i>
                 <h3 class="card-title">Discord</h3>
                 <a href="https://discord.gg/x6mQzyDvv5" class="contact-link" target="_blank">Join Server</a>
+                <div class="live-feed">
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-users"></i>
+                        <span>Members: 1.2k+ online</span>
+                    </div>
+                </div>
             </div>
             <div class="card contact-card">
                 <i class="fab fa-youtube contact-icon"></i>
                 <h3 class="card-title">YouTube</h3>
                 <a href="https://youtube.com/@toknowtheworldd?si=3jkMCCCAZCpFeKJg" class="contact-link" target="_blank">To Know The World</a>
+                <div class="live-feed">
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-video"></i>
+                        <span>Latest: Cosmic Psychology Explained</span>
+                    </div>
+                    <div class="feed-item">
+                        <i class="feed-icon fas fa-eye"></i>
+                        <span>12.5K views | 2 days ago</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -708,8 +972,9 @@
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-        // Mobile Menu Toggle
+        // ===== MOBILE MENU TOGGLE =====
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
         
@@ -726,7 +991,7 @@
             });
         });
 
-        // Smooth Scrolling
+        // ===== SMOOTH SCROLLING =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -744,7 +1009,7 @@
             });
         });
 
-        // Particle Animation
+        // ===== PARTICLE ANIMATION =====
         function createParticles(containerId, count, sizes) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -783,7 +1048,22 @@
             createParticles('contact-particles', 50, [1, 2, 3]);
         });
 
-        // Simulate C++ integration with terminal output
+        // ===== PARTICLE INTERACTION =====
+        document.addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.particle');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            particles.forEach(particle => {
+                const speed = 20;
+                const x = (mouseX - 0.5) * speed;
+                const y = (mouseY - 0.5) * speed;
+                
+                particle.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // ===== SIMULATE C++ INTEGRATION =====
         function simulateCppIntegration() {
             console.log("Simulating C++ integration for cosmic calculations...");
             
@@ -807,24 +1087,186 @@
                 
                 setTimeout(typeWriter, 1000);
             });
-            
-            // This would normally be fetched from a server running the C++ code
-            const simulationData = {
-                stars: [
-                    {x: 100, y: 200, size: 3, speed: 0.7},
-                    {x: 300, y: 150, size: 2, speed: 0.9},
-                    {x: 500, y: 300, size: 4, speed: 0.5},
-                ],
-                orbits: [
-                    {centerX: 400, centerY: 300, radius: 150, speed: 0.03},
-                ]
-            };
-            
-            console.log("Simulation data received:", simulationData);
         }
 
         // Initialize the simulation
         setTimeout(simulateCppIntegration, 1500);
+
+        // ===== THEME SWITCHER =====
+        const themeSwitcher = document.getElementById('theme-switcher');
+        const themeOptions = document.getElementById('theme-options');
+        
+        themeSwitcher.addEventListener('click', () => {
+            themeOptions.style.display = themeOptions.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove active class from all options
+                document.querySelectorAll('.theme-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                
+                // Add active class to clicked option
+                option.classList.add('active');
+                
+                // Get theme name
+                const theme = option.getAttribute('data-theme');
+                document.documentElement.setAttribute('data-theme', theme);
+                
+                // Update CSS variables based on theme
+                if (theme === 'cosmic') {
+                    document.documentElement.style.setProperty('--gold', '#FFD700');
+                    document.documentElement.style.setProperty('--dark-gold', '#D4AF37');
+                    document.documentElement.style.setProperty('--light-gold', '#FFEA80');
+                    document.documentElement.style.setProperty('--dark-bg', '#0a0a0a');
+                    document.documentElement.style.setProperty('--card-bg', 'rgba(25, 20, 5, 0.85)');
+                } else if (theme === 'dark') {
+                    document.documentElement.style.setProperty('--gold', '#6b8cff');
+                    document.documentElement.style.setProperty('--dark-gold', '#4a6ee0');
+                    document.documentElement.style.setProperty('--light-gold', '#8babff');
+                    document.documentElement.style.setProperty('--dark-bg', '#121212');
+                    document.documentElement.style.setProperty('--card-bg', 'rgba(30, 30, 40, 0.85)');
+                } else if (theme === 'light') {
+                    document.documentElement.style.setProperty('--gold', '#ff6b6b');
+                    document.documentElement.style.setProperty('--dark-gold', '#e05a5a');
+                    document.documentElement.style.setProperty('--light-gold', '#ff8b8b');
+                    document.documentElement.style.setProperty('--dark-bg', '#f5f5f5');
+                    document.documentElement.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.9)');
+                }
+                
+                // Hide theme options
+                themeOptions.style.display = 'none';
+            });
+        });
+
+        // ===== AI ASSISTANT =====
+        const aiAssistant = document.querySelector('.ai-assistant');
+        const aiChat = document.getElementById('ai-chat');
+        const aiMessages = document.getElementById('ai-messages');
+        const aiInput = document.getElementById('ai-input');
+        const aiSend = document.getElementById('ai-send');
+        
+        aiAssistant.addEventListener('click', () => {
+            aiChat.style.display = aiChat.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        aiSend.addEventListener('click', sendMessage);
+        aiInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        
+        function sendMessage() {
+            const message = aiInput.value.trim();
+            if (message) {
+                // Add user message
+                addMessage(message, 'user');
+                aiInput.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const responses = [
+                        "I'm your cosmic assistant! How can I help you explore the universe today?",
+                        "Fascinating question! Let me consult my knowledge of the cosmos...",
+                        "Based on my analysis of celestial patterns, I'd recommend...",
+                        "That's an interesting thought! From a psychological perspective...",
+                        "The cosmos holds many secrets. Would you like to explore this further?",
+                        "I've processed your query through my neural networks. Here's what I found...",
+                        "The stars align with your question! Here's what I think..."
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage(randomResponse, 'bot');
+                }, 1000);
+            }
+        }
+        
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('ai-message', sender);
+            messageDiv.textContent = text;
+            aiMessages.appendChild(messageDiv);
+            aiMessages.scrollTop = aiMessages.scrollHeight;
+        }
+
+        // ===== LIVE FEED UPDATES =====
+        function updateLiveFeeds() {
+            // Simulate visitor count (in a real app, this would come from a backend)
+            const visitorCount = Math.floor(Math.random() * 100) + 50;
+            document.getElementById('visitor-count').textContent = visitorCount;
+            
+            // Simulate GitHub stats
+            const githubStats = Math.floor(Math.random() * 100) + 20;
+            document.getElementById('github-stats').textContent = githubStats;
+            
+            // Update feed items periodically
+            setInterval(() => {
+                const feedItems = document.querySelectorAll('.feed-item');
+                feedItems.forEach(item => {
+                    if (Math.random() > 0.7) {
+                        item.style.opacity = '0.7';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                        }, 300);
+                    }
+                });
+            }, 5000);
+        }
+        
+        updateLiveFeeds();
+
+        // ===== LAZY LOADING =====
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards for lazy loading
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+
+        // ===== 3D COSMIC OBJECTS (SIMPLIFIED) =====
+        function create3DObjects() {
+            const container = document.getElementById('webgl-container');
+            
+            // Create simplified 3D objects using CSS
+            const objects = [
+                { type: 'planet', size: '80px', color: 'radial-gradient(circle, #D4AF37, #8B7500)', top: '20%', left: '10%' },
+                { type: 'planet', size: '50px', color: 'radial-gradient(circle, #6b8cff, #4a6ee0)', top: '70%', left: '85%' },
+                { type: 'star', size: '120px', color: 'radial-gradient(circle, rgba(255,215,0,0.8), transparent)', top: '40%', left: '80%' },
+                { type: 'nebula', size: '200px', color: 'radial-gradient(circle, rgba(100,50,255,0.3), transparent)', top: '60%', left: '15%' }
+            ];
+            
+            objects.forEach(obj => {
+                const element = document.createElement('div');
+                element.style.position = 'absolute';
+                element.style.width = obj.size;
+                element.style.height = obj.size;
+                element.style.background = obj.color;
+                element.style.borderRadius = '50%';
+                element.style.top = obj.top;
+                element.style.left = obj.left;
+                element.style.filter = 'blur(2px)';
+                element.style.animation = `float ${15 + Math.random() * 10}s infinite ease-in-out`;
+                element.style.opacity = '0.6';
+                container.appendChild(element);
+            });
+        }
+        
+        create3DObjects();
     </script>
 </body>
-    </html>
+</html>
