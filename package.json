@@ -1,7 +1,7 @@
 {
   "name": "signal-proxy",
   "version": "2.0.0",
-  "description": "High-Performance Signal Proxy",
+  "description": "High-Performance Signal Proxy with SOCKS5",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -12,7 +12,8 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "http-proxy-middleware": "^2.0.6",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "socks5-server": "^1.1.0"
   },
   "engines": {
     "node": ">=18.x"
