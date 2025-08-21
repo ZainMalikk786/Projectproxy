@@ -287,6 +287,52 @@
             color: var(--gold);
         }
 
+        /* YouTube Videos Section */
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .video-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all var(--transition-speed);
+            backdrop-filter: blur(5px);
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px var(--gold);
+            border-color: var(--gold);
+        }
+
+        .video-thumb {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .video-info {
+            padding: 1.2rem;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--gold);
+            line-height: 1.4;
+        }
+
+        .video-date {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
         /* Live Feed Cards */
         .live-feed {
             display: flex;
@@ -518,7 +564,7 @@
             left: 20px;
             width: 300px;
             height: 400px;
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(10, 10, 10, 0.95);
             border-radius: 15px;
             border: 1px solid var(--gold);
             box-shadow: 0 0 20px var(--gold);
@@ -526,6 +572,7 @@
             flex-direction: column;
             z-index: 1000;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         .ai-header {
@@ -547,19 +594,22 @@
         }
 
         .ai-message {
-            padding: 10px;
+            padding: 10px 15px;
             border-radius: 10px;
             max-width: 80%;
+            line-height: 1.4;
         }
 
         .ai-message.bot {
             background: rgba(255, 215, 0, 0.2);
             align-self: flex-start;
+            border-bottom-left-radius: 2px;
         }
 
         .ai-message.user {
             background: rgba(255, 255, 255, 0.1);
             align-self: flex-end;
+            border-bottom-right-radius: 2px;
         }
 
         .ai-input {
@@ -567,15 +617,21 @@
             border-top: 1px solid var(--gold);
             display: flex;
             gap: 10px;
+            background: rgba(10, 10, 10, 0.8);
         }
 
         .ai-input input {
             flex: 1;
-            padding: 10px;
+            padding: 10px 15px;
             border-radius: 20px;
             border: 1px solid var(--gold);
             background: rgba(255, 255, 255, 0.1);
             color: white;
+            outline: none;
+        }
+
+        .ai-input input:focus {
+            box-shadow: 0 0 8px var(--gold);
         }
 
         .ai-input button {
@@ -586,6 +642,12 @@
             color: var(--dark-bg);
             cursor: pointer;
             font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .ai-input button:hover {
+            background: var(--light-gold);
+            transform: scale(1.05);
         }
 
         /* Stats Counter */
@@ -660,8 +722,8 @@
             .section-title {
                 font-size: 2rem;
             }
-            
-            .card-grid {
+
+            .card-grid, .videos-container {
                 grid-template-columns: 1fr;
             }
 
@@ -693,6 +755,7 @@
             <a href="#home">Home</a>
             <a href="#universe">Universe</a>
             <a href="#psychology">Psychology</a>
+            <a href="#youtube">YouTube</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </div>
@@ -717,8 +780,7 @@
     <div class="ai-chat" id="ai-chat">
         <div class="ai-header">Cosmic Assistant</div>
         <div class="ai-messages" id="ai-messages">
-            <div class="ai-message bot">Hello! I'm your cosmic assistant. How can I help you explore today?
-shhh hello from zain👀</div>
+            <div class="ai-message bot">Hello! I'm your cosmic assistant. How can I help you explore today?<br><small>shhh hello from zain👀</small></div>
         </div>
         <div class="ai-input">
             <input type="text" id="ai-input" placeholder="Ask something...">
@@ -765,7 +827,7 @@ shhh hello from zain👀</div>
                 <p>Identifying habitable worlds beyond our solar system using transit photometry and radial velocity methods.</p>
             </div>
         </div>
-        
+
         <!-- C++ Terminal Simulation -->
         <div class="cpp-terminal">
             <div class="terminal-header">
@@ -782,7 +844,7 @@ shhh hello from zain👀</div>
 
 <span class="keyword">int</span> <span class="function">main</span>() {
     <span class="function">initializeUniverse</span>();
-    
+
     <span class="comment">// Generate 150 stars with random properties</span>
     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">150</span>; i++) {
         <span class="function">createStar</span>(
@@ -791,10 +853,10 @@ shhh hello from zain👀</div>
             <span class="function">randomVelocity</span>(<span class="number">0.1</span>, <span class="number">1.0</span>)
         );
     }
-    
+
     <span class="comment">// Calculate orbital mechanics</span>
     <span class="function">calculateGravitationalInteractions</span>();
-    
+
     <span class="function">renderSimulation</span>();
     <span class="keyword">return</span> <span class="number">0</span>;
 }</pre>
@@ -849,6 +911,15 @@ shhh hello from zain👀</div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- YouTube Section -->
+    <section id="youtube">
+        <div class="particles-container" id="youtube-particles"></div>
+        <h2 class="section-title">YouTube Content</h2>
+        <div class="videos-container" id="video-list">
+            <!-- Videos will be loaded here by JavaScript -->
         </div>
     </section>
 
@@ -978,7 +1049,7 @@ shhh hello from zain👀</div>
         // ===== MOBILE MENU TOGGLE =====
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
-        
+
         menuToggle.addEventListener('click', () => {
             menuToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
@@ -996,10 +1067,10 @@ shhh hello from zain👀</div>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
+
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
+
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
@@ -1014,28 +1085,28 @@ shhh hello from zain👀</div>
         function createParticles(containerId, count, sizes) {
             const container = document.getElementById(containerId);
             if (!container) return;
-            
+
             for (let i = 0; i < count; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
-                
+
                 // Random size
                 const size = sizes[Math.floor(Math.random() * sizes.length)];
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
-                
+
                 // Random position
                 const x = Math.random() * 100;
                 const y = Math.random() * 100;
                 particle.style.left = `${x}%`;
                 particle.style.top = `${y}%`;
-                
+
                 // Random animation delay and duration
                 const delay = Math.random() * 5;
                 const duration = 10 + Math.random() * 10;
                 particle.style.animationDelay = `${delay}s`;
                 particle.style.animationDuration = `${duration}s`;
-                
+
                 container.appendChild(particle);
             }
         }
@@ -1045,6 +1116,7 @@ shhh hello from zain👀</div>
             createParticles('home-particles', 80, [2, 3, 4]);
             createParticles('universe-particles', 120, [1, 2, 3, 4]);
             createParticles('psychology-particles', 60, [2, 3]);
+            createParticles('youtube-particles', 90, [2, 3, 4]);
             createParticles('projects-particles', 100, [2, 3, 4]);
             createParticles('contact-particles', 50, [1, 2, 3]);
         });
@@ -1054,12 +1126,12 @@ shhh hello from zain👀</div>
             const particles = document.querySelectorAll('.particle');
             const mouseX = e.clientX / window.innerWidth;
             const mouseY = e.clientY / window.innerHeight;
-            
+
             particles.forEach(particle => {
                 const speed = 20;
                 const x = (mouseX - 0.5) * speed;
                 const y = (mouseY - 0.5) * speed;
-                
+
                 particle.style.transform = `translate(${x}px, ${y}px)`;
             });
         });
@@ -1067,15 +1139,15 @@ shhh hello from zain👀</div>
         // ===== SIMULATE C++ INTEGRATION =====
         function simulateCppIntegration() {
             console.log("Simulating C++ integration for cosmic calculations...");
-            
+
             // Simulate terminal output
             const terminals = document.querySelectorAll('.terminal-content');
-            
+
             // Typewriter effect for terminal content
             terminals.forEach(terminal => {
                 const content = terminal.innerHTML;
                 terminal.innerHTML = '';
-                
+
                 let i = 0;
                 const typeWriter = () => {
                     if (i < content.length) {
@@ -1085,7 +1157,7 @@ shhh hello from zain👀</div>
                         setTimeout(typeWriter, 10);
                     }
                 };
-                
+
                 setTimeout(typeWriter, 1000);
             });
         }
@@ -1096,25 +1168,25 @@ shhh hello from zain👀</div>
         // ===== THEME SWITCHER =====
         const themeSwitcher = document.getElementById('theme-switcher');
         const themeOptions = document.getElementById('theme-options');
-        
+
         themeSwitcher.addEventListener('click', () => {
             themeOptions.style.display = themeOptions.style.display === 'flex' ? 'none' : 'flex';
         });
-        
+
         document.querySelectorAll('.theme-option').forEach(option => {
             option.addEventListener('click', () => {
                 // Remove active class from all options
                 document.querySelectorAll('.theme-option').forEach(opt => {
                     opt.classList.remove('active');
                 });
-                
+
                 // Add active class to clicked option
                 option.classList.add('active');
-                
+
                 // Get theme name
                 const theme = option.getAttribute('data-theme');
                 document.documentElement.setAttribute('data-theme', theme);
-                
+
                 // Update CSS variables based on theme
                 if (theme === 'cosmic') {
                     document.documentElement.style.setProperty('--gold', '#FFD700');
@@ -1135,11 +1207,65 @@ shhh hello from zain👀</div>
                     document.documentElement.style.setProperty('--dark-bg', '#f5f5f5');
                     document.documentElement.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.9)');
                 }
-                
+
                 // Hide theme options
                 themeOptions.style.display = 'none';
             });
         });
+
+        // ===== YOUTUBE API INTEGRATION =====
+        const channelId = "UCUAMl97TS0aISsgErhhRKKA";
+        const youtubeApiKey = "AIzaSyA7xu-bXPXNsbhfs8w5J7h8iD_q0f0ajiM";
+
+        async function fetchVideos() {
+            try {
+                const res = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${youtubeApiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=10`);
+                const data = await res.json();
+                const videosContainer = document.getElementById("video-list");
+                videosContainer.innerHTML = "";
+                
+                data.items.forEach(video => {
+                    if(video.id.videoId){
+                        const videoCard = document.createElement("div");
+                        videoCard.classList.add("video-card");
+                        
+                        // Format the date
+                        const videoDate = new Date(video.snippet.publishedAt);
+                        const formattedDate = videoDate.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        });
+                        
+                        videoCard.innerHTML = `
+                            <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">
+                                <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}" class="video-thumb">
+                            </a>
+                            <div class="video-info">
+                                <h3 class="video-title">${video.snippet.title}</h3>
+                                <p class="video-date">Published: ${formattedDate}</p>
+                            </div>
+                        `;
+                        videosContainer.appendChild(videoCard);
+                    }
+                });
+            } catch(err) { 
+                console.error("Error fetching YouTube videos:", err);
+                // Fallback content if API fails
+                document.getElementById("video-list").innerHTML = `
+                    <div class="card">
+                        <h3 class="card-title">YouTube Content</h3>
+                        <p>Check out my YouTube channel for cosmic explorations and psychology insights!</p>
+                        <a href="https://youtube.com/@toknowtheworldd?si=3jkMCCCAZCpFeKJg" target="_blank" class="btn" style="margin-top: 15px;">
+                            Visit My Channel
+                        </a>
+                    </div>
+                `;
+            }
+        }
+
+        // Fetch videos when page loads
+        fetchVideos();
 
         // ===== AI ASSISTANT =====
         const aiAssistant = document.querySelector('.ai-assistant');
@@ -1147,26 +1273,54 @@ shhh hello from zain👀</div>
         const aiMessages = document.getElementById('ai-messages');
         const aiInput = document.getElementById('ai-input');
         const aiSend = document.getElementById('ai-send');
-        
+
         aiAssistant.addEventListener('click', () => {
             aiChat.style.display = aiChat.style.display === 'flex' ? 'none' : 'flex';
+            if (aiChat.style.display === 'flex') {
+                aiInput.focus();
+            }
         });
-        
+
         aiSend.addEventListener('click', sendMessage);
         aiInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
         });
-        
-        function sendMessage() {
+
+        // OpenAI API Key
+        const openAiKey = "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";
+
+        async function sendMessage() {
             const message = aiInput.value.trim();
             if (message) {
                 // Add user message
                 addMessage(message, 'user');
                 aiInput.value = '';
-                
-                // Simulate AI response
-                setTimeout(() => {
-                    const responses = [
+
+                try {
+                    // Call OpenAI API
+                    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${openAiKey}`
+                        },
+                        body: JSON.stringify({
+                            model: "gpt-3.5-turbo",
+                            messages: [{ role: "user", content: message }],
+                            max_tokens: 150
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    if (data.choices && data.choices.length > 0) {
+                        addMessage(data.choices[0].message.content, 'bot');
+                    } else {
+                        throw new Error("Invalid response from AI");
+                    }
+                } catch(err) { 
+                    console.error("Error with AI API:", err);
+                    // Fallback responses if API fails
+                    const fallbackResponses = [
                         "I'm your cosmic assistant! How can I help you explore the universe today?",
                         "Fascinating question! Let me consult my knowledge of the cosmos...",
                         "Based on my analysis of celestial patterns, I'd recommend...",
@@ -1175,12 +1329,12 @@ shhh hello from zain👀</div>
                         "I've processed your query through my neural networks. Here's what I found...",
                         "The stars align with your question! Here's what I think..."
                     ];
-                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    const randomResponse = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
                     addMessage(randomResponse, 'bot');
-                }, 1000);
+                }
             }
         }
-        
+
         function addMessage(text, sender) {
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('ai-message', sender);
@@ -1194,11 +1348,11 @@ shhh hello from zain👀</div>
             // Simulate visitor count (in a real app, this would come from a backend)
             const visitorCount = Math.floor(Math.random() * 100) + 50;
             document.getElementById('visitor-count').textContent = visitorCount;
-            
+
             // Simulate GitHub stats
             const githubStats = Math.floor(Math.random() * 100) + 20;
             document.getElementById('github-stats').textContent = githubStats;
-            
+
             // Update feed items periodically
             setInterval(() => {
                 const feedItems = document.querySelectorAll('.feed-item');
@@ -1212,7 +1366,7 @@ shhh hello from zain👀</div>
                 });
             }, 5000);
         }
-        
+
         updateLiveFeeds();
 
         // ===== LAZY LOADING =====
@@ -1221,7 +1375,7 @@ shhh hello from zain👀</div>
             rootMargin: '0px',
             threshold: 0.1
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1230,9 +1384,9 @@ shhh hello from zain👀</div>
                 }
             });
         }, observerOptions);
-        
+
         // Observe all cards for lazy loading
-        document.querySelectorAll('.card').forEach(card => {
+        document.querySelectorAll('.card, .video-card').forEach(card => {
             card.style.opacity = 0;
             card.style.transform = 'translateY(20px)';
             card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
@@ -1242,7 +1396,7 @@ shhh hello from zain👀</div>
         // ===== 3D COSMIC OBJECTS (SIMPLIFIED) =====
         function create3DObjects() {
             const container = document.getElementById('webgl-container');
-            
+
             // Create simplified 3D objects using CSS
             const objects = [
                 { type: 'planet', size: '80px', color: 'radial-gradient(circle, #D4AF37, #8B7500)', top: '20%', left: '10%' },
@@ -1250,7 +1404,7 @@ shhh hello from zain👀</div>
                 { type: 'star', size: '120px', color: 'radial-gradient(circle, rgba(255,215,0,0.8), transparent)', top: '40%', left: '80%' },
                 { type: 'nebula', size: '200px', color: 'radial-gradient(circle, rgba(100,50,255,0.3), transparent)', top: '60%', left: '15%' }
             ];
-            
+
             objects.forEach(obj => {
                 const element = document.createElement('div');
                 element.style.position = 'absolute';
@@ -1266,8 +1420,8 @@ shhh hello from zain👀</div>
                 container.appendChild(element);
             });
         }
-        
+
         create3DObjects();
     </script>
 </body>
-    </html>
+                    </html>
