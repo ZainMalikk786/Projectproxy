@@ -302,6 +302,7 @@
             overflow: hidden;
             transition: all var(--transition-speed);
             backdrop-filter: blur(5px);
+            cursor: pointer;
         }
 
         .video-card:hover {
@@ -331,6 +332,117 @@
         .video-date {
             font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Search Bar */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .search-bar {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            border-radius: 50px;
+            overflow: hidden;
+            border: 1px solid var(--gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-button {
+            padding: 1rem 1.5rem;
+            background: var(--gold);
+            border: none;
+            color: var(--dark-bg);
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .search-button:hover {
+            background: var(--light-gold);
+        }
+
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 900px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 30px var(--gold);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid var(--gold);
+            color: white;
+        }
+
+        .modal-title {
+            color: var(--gold);
+            font-size: 1.3rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: black;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-description {
+            color: white;
+            line-height: 1.6;
         }
 
         /* Live Feed Cards */
@@ -420,6 +532,7 @@
             display: flex;
             justify-content: center;
             gap: 1.5rem;
+            margin-top: 1rem;
         }
 
         .social-icons a {
@@ -669,6 +782,53 @@
             font-weight: bold;
         }
 
+        /* Setup Instructions */
+        .setup-instructions {
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        .setup-instructions h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .setup-instructions ol {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .setup-instructions li {
+            margin-bottom: 10px;
+        }
+
+        .setup-instructions code {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--gold);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -738,6 +898,10 @@
                 right: 10px;
                 font-size: 0.8rem;
             }
+
+            .modal-content {
+                width: 95%;
+            }
         }
     </style>
 </head>
@@ -747,6 +911,22 @@
 
     <!-- 3D Objects Container -->
     <div class="webgl-container" id="webgl-container"></div>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="video-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Video Title</h3>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="video-player" id="video-player">
+                <!-- YouTube iframe will be inserted here -->
+            </div>
+            <div class="modal-body">
+                <p class="modal-description" id="modal-description">Video description goes here.</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav>
@@ -781,6 +961,7 @@
         <div class="ai-header">Cosmic Assistant</div>
         <div class="ai-messages" id="ai-messages">
             <div class="ai-message bot">Hello! I'm your cosmic assistant. How can I help you explore today?<br><small>shhh hello from zain👀</small></div>
+            <div class="ai-message bot">Note: For full AI functionality, you need to set up a backend server with your API keys.</div>
         </div>
         <div class="ai-input">
             <input type="text" id="ai-input" placeholder="Ask something...">
@@ -918,8 +1099,19 @@
     <section id="youtube">
         <div class="particles-container" id="youtube-particles"></div>
         <h2 class="section-title">YouTube Content</h2>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-bar">
+                <input type="text" class="search-input" id="youtube-search" placeholder="Search for videos...">
+                <button class="search-button" id="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
         <div class="videos-container" id="video-list">
-            <!-- Videos will be loaded here by JavaScript -->
+            <div class="spinner" id="loading-spinner"></div>
         </div>
     </section>
 
@@ -1214,46 +1406,84 @@
         });
 
         // ===== YOUTUBE API INTEGRATION =====
-        const channelId = "UCUAMl97TS0aISsgErhhRKKA";
-        const youtubeApiKey = "AIzaSyA7xu-bXPXNsbhfs8w5J7h8iD_q0f0ajiM";
+        const YOUTUBE_API_KEY = 'AIzaSyA7xu-bXPXNsbhfs8w5J7h8iD_q0f0ajiM';
+        const CHANNEL_ID = 'UCUAMl97TS0aISsgErhhRKKA';
 
-        async function fetchVideos() {
+        async function fetchVideos(searchQuery = '') {
             try {
-                const res = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${youtubeApiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=10`);
-                const data = await res.json();
+                // Show loading spinner
+                document.getElementById("loading-spinner").style.display = "block";
+                
+                let url = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=20`;
+                
+                if (searchQuery) {
+                    url += `&q=${encodeURIComponent(searchQuery)}`;
+                }
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
                 const videosContainer = document.getElementById("video-list");
                 videosContainer.innerHTML = "";
                 
-                data.items.forEach(video => {
-                    if(video.id.videoId){
-                        const videoCard = document.createElement("div");
-                        videoCard.classList.add("video-card");
-                        
-                        // Format the date
-                        const videoDate = new Date(video.snippet.publishedAt);
-                        const formattedDate = videoDate.toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric'
-                        });
-                        
-                        videoCard.innerHTML = `
-                            <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">
-                                <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}" class="video-thumb">
-                            </a>
-                            <div class="video-info">
-                                <h3 class="video-title">${video.snippet.title}</h3>
-                                <p class="video-date">Published: ${formattedDate}</p>
-                            </div>
-                        `;
-                        videosContainer.appendChild(videoCard);
-                    }
+                if (data.error) {
+                    throw new Error(data.error.message);
+                }
+                
+                if (data.items.length === 0) {
+                    videosContainer.innerHTML = `
+                        <div class="card" style="grid-column: 1 / -1; text-align: center;">
+                            <h3 class="card-title">No videos found</h3>
+                            <p>Try a different search term or check back later for new content.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                data.items.forEach(item => {
+                    if (item.id.kind !== 'youtube#video') return;
+                    
+                    const videoId = item.id.videoId;
+                    const title = item.snippet.title;
+                    const thumbnail = item.snippet.thumbnails.medium.url;
+                    const publishedAt = item.snippet.publishedAt;
+                    const description = item.snippet.description;
+                    
+                    const videoCard = document.createElement("div");
+                    videoCard.classList.add("video-card");
+                    videoCard.dataset.videoId = videoId;
+                    videoCard.dataset.title = title;
+                    videoCard.dataset.description = description;
+                    
+                    // Format the date
+                    const videoDate = new Date(publishedAt);
+                    const formattedDate = videoDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                    
+                    videoCard.innerHTML = `
+                        <img src="${thumbnail}" alt="${title}" class="video-thumb">
+                        <div class="video-info">
+                            <h3 class="video-title">${title}</h3>
+                            <p class="video-date">Published: ${formattedDate}</p>
+                        </div>
+                    `;
+                    
+                    // Add click event to open video in modal
+                    videoCard.addEventListener('click', () => {
+                        openVideoModal(videoId, title, description);
+                    });
+                    
+                    videosContainer.appendChild(videoCard);
                 });
+                
             } catch(err) { 
                 console.error("Error fetching YouTube videos:", err);
                 // Fallback content if API fails
                 document.getElementById("video-list").innerHTML = `
-                    <div class="card">
+                    <div class="card" style="grid-column: 1 / -1; text-align: center;">
                         <h3 class="card-title">YouTube Content</h3>
                         <p>Check out my YouTube channel for cosmic explorations and psychology insights!</p>
                         <a href="https://youtube.com/@toknowtheworldd?si=3jkMCCCAZCpFeKJg" target="_blank" class="btn" style="margin-top: 15px;">
@@ -1261,8 +1491,74 @@
                         </a>
                     </div>
                 `;
+            } finally {
+                // Hide loading spinner
+                document.getElementById("loading-spinner").style.display = "none";
             }
         }
+
+        // ===== VIDEO MODAL FUNCTIONALITY =====
+        const videoModal = document.getElementById('video-modal');
+        const closeModal = document.getElementById('close-modal');
+        const videoPlayer = document.getElementById('video-player');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+
+        function openVideoModal(videoId, title, description) {
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+            
+            // Create YouTube iframe
+            videoPlayer.innerHTML = `
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            `;
+            
+            videoModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeVideoModal() {
+            videoModal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+            videoPlayer.innerHTML = ''; // Remove iframe to stop video
+        }
+
+        closeModal.addEventListener('click', closeVideoModal);
+        
+        // Close modal when clicking outside the content
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeVideoModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal.style.display === 'flex') {
+                closeVideoModal();
+            }
+        });
+
+        // ===== SEARCH FUNCTIONALITY =====
+        const searchInput = document.getElementById('youtube-search');
+        const searchButton = document.getElementById('search-button');
+
+        searchButton.addEventListener('click', () => {
+            fetchVideos(searchInput.value);
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                fetchVideos(searchInput.value);
+            }
+        });
 
         // Fetch videos when page loads
         fetchVideos();
@@ -1286,9 +1582,7 @@
             if (e.key === 'Enter') sendMessage();
         });
 
-        // OpenAI API Key
-        const openAiKey = "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";
-
+        // AI Functionality - This will use a fallback since API keys are not exposed
         async function sendMessage() {
             const message = aiInput.value.trim();
             if (message) {
@@ -1297,26 +1591,31 @@
                 aiInput.value = '';
 
                 try {
-                    // Call OpenAI API
-                    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${openAiKey}`
-                        },
-                        body: JSON.stringify({
-                            model: "gpt-3.5-turbo",
-                            messages: [{ role: "user", content: message }],
-                            max_tokens: 150
-                        })
-                    });
+                    // In a real implementation, you would call your backend here
+                    // const response = await fetch('/api/ai-chat', {
+                    //     method: "POST",
+                    //     headers: {
+                    //         "Content-Type": "application/json"
+                    //     },
+                    //     body: JSON.stringify({ message: message })
+                    // });
+                    // const data = await response.json();
+                    // addMessage(data.response, 'bot');
                     
-                    const data = await response.json();
-                    if (data.choices && data.choices.length > 0) {
-                        addMessage(data.choices[0].message.content, 'bot');
-                    } else {
-                        throw new Error("Invalid response from AI");
-                    }
+                    // For demo purposes, we'll use a fallback
+                    setTimeout(() => {
+                        const responses = [
+                            "I'm your cosmic assistant! How can I help you explore the universe today?",
+                            "Fascinating question! Let me consult my knowledge of the cosmos...",
+                            "Based on my analysis of celestial patterns, I'd recommend...",
+                            "That's an interesting thought! From a psychological perspective...",
+                            "The cosmos holds many secrets. Would you like to explore this further?",
+                            "I've processed your query through my neural networks. Here's what I found...",
+                            "The stars align with your question! Here's what I think..."
+                        ];
+                        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                        addMessage(randomResponse, 'bot');
+                    }, 1000);
                 } catch(err) { 
                     console.error("Error with AI API:", err);
                     // Fallback responses if API fails
@@ -1424,4 +1723,4 @@
         create3DObjects();
     </script>
 </body>
-                    </html>
+        </html>
